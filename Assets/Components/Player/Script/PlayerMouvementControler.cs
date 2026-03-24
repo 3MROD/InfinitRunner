@@ -7,19 +7,24 @@ using UnityEngine.InputSystem;
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     [SerializeField] private float _jumpDuration = 1f ;
-    [SerializeField] private float _jumpHeight = 2f;
+    [SerializeField] private float _jumpHeight = 3f;
     [SerializeField] private AnimationCurve _jumpCurve;
     [SerializeField] private AnimationCurve _fallCurve;
 
     [Header("Slide parameters")] 
     [SerializeField] private float _slideDuration;
     [SerializeField] private Transform[] _slideTarget;
-   [Header("Debug")] 
+
+	[Header("component")]
+    [SerializeField] private Animator _animator;
+
+    [Header("Debug")] 
     [SerializeField]private int _currentLaneIndex = 2;
     [SerializeField]private bool _isSliding;
     [SerializeField]private bool _isJumping; 
     public void Update()
     {
+        
        
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
@@ -62,6 +67,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private IEnumerator JumpCoroutine()
     {
         _isJumping = true;
+        _animator.SetBool("IsJumping", true);
         float jumpTimer =0f;
         float halfJumpDuration =_jumpDuration/2f;
         //jump
@@ -93,6 +99,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             yield return null;
         }
         _isJumping = false;
+        _animator.SetBool("IsJumping", false);
     }
 
     private IEnumerator SlideCoroutine(Transform target)
