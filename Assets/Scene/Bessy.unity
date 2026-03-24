@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506e0cc4b9d4c6f49a70746b83215092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpDuration: 1
+  _jumpDuration: 2
   _jumpHeight: 2
   _jumpCurve:
     serializedVersion: 2
@@ -489,6 +489,7 @@ MonoBehaviour:
   - {fileID: 1725910149}
   - {fileID: 70755994}
   - {fileID: 1448471142}
+  _animator: {fileID: 1551892388}
   _currentLaneIndex: 2
   _isSliding: 0
   _isJumping: 0
@@ -575,6 +576,56 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 197439651}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2042179799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2042179801}
+  - component: {fileID: 2042179800}
+  m_Layer: 0
+  m_Name: ObstacleController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2042179800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042179799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c92900130951f642a8041a1ff6bdf66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _translationSpeed: 4
+  _activeChunkCount: 5
+  _behindChunkCount: 1
+  _chunckPool:
+  - {fileID: 8903121574132136150, guid: 59e5661cbd869d94d85b7a5ad4bc6a16, type: 3}
+  - {fileID: 8903121574132136150, guid: 59e5661cbd869d94d85b7a5ad4bc6a16, type: 3}
+--- !u!4 &2042179801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042179799}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2983892785100169425
 PrefabInstance:
@@ -693,3 +744,4 @@ SceneRoots:
   - {fileID: 1461573830}
   - {fileID: 1266652000}
   - {fileID: 2983892785100169425}
+  - {fileID: 2042179801}

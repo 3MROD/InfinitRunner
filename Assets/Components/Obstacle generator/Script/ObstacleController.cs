@@ -1,21 +1,67 @@
-using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ObstacleController : MonoBehaviour
 {
-    [Header("Parametres")]
-    [SerializeField, Tooltip("translation speed of chunks in m/s")] private float _translationSpeed = 1f;
-
+    [Header("Parameters")]
+    [SerializeField, Tooltip("Translation speed of chunks in m/s")] private float _translationSpeed = 1f;
     [SerializeField] private int _activeChunkCount = 5;
-    [Header("components")]
-    [SerializeField] private ChunkController[] _chunckPool;
-    private List<ChunkController> _instancedChunks = new();
+    [SerializeField] private int _behindChunkCount = 1;
+    
+    [Header("Components")]
+    [SerializeField] private ChunkController[] _chunksPool;
+    
+    private readonly List<ChunkController> _instancedChunks = new();
+    
     private void Start()
     {
-        AddBaseChunk(); 
+        AddBaseChunk();
+    }
+
+    private void Update()
+    {
+        foreach (var chunk in _instancedChunks)
+        {
+            chunk.transform.Translate(Vector3.back * _translationSpeed * Time.deltaTime);
+        }
+
+        UpdateChunks();
+    }
+
+    private void UpdateChunks()
+    {
+        List<ChunkController> behindChunks = new();
+
+        foreach (var chunk in _instancedChunks)
+        {
+            if (chunk.IsBehindPlayer())
+            {
+                behindChunks.Add(chunk);
+            }
+        }
+
+        // Delete potential chunks behind player.
+        if (behindChunks.Count > _behindChunkCount)
+        {
+            int chunkToDeleteCount = behindChunks.Count - _behindChunkCount;
+
+            for (int i = 0; i < chunkToDeleteCount; i++)
+            {
+                var chunkToDelete = behindChunks[i];
+                _instancedChunks.Remove(chunkToDelete);
+                
+                Destroy(chunkToDelete.gameObject);
+            }
+        }
+        
+        // Add potential new chunks.
+        int missingChunkCount = _activeChunkCount - _instancedChunks.Count;
+        for (int i = 0; i < missingChunkCount; i++)
+        {
+            var chunk = AddChunk(LastActiveChunk().EndAnchor);
+            _instancedChunks.Add(chunk);
+        }
     }
 
     private void AddBaseChunk()
@@ -24,28 +70,31 @@ public class ObstacleController : MonoBehaviour
         {
             if (i == 0)
             {
-                var basechunk = Addchunck(transform.position);
-                _instancedChunks.Add(basechunk);
+                var baseChunk = AddChunk(transform.position);
+                _instancedChunks.Add(baseChunk);
                 continue;
             }
-            var chunk = Addchunck(LastChunk().EndAnchor);
+
+            var chunk = AddChunk(LastActiveChunk().EndAnchor);
             _instancedChunks.Add(chunk);
         }
     }
 
-    private ChunkController Addchunck(Vector3 position)
+    private ChunkController AddChunk(Vector3 position)
     {
-        if (_chunckPool.Length == 0)
+        if (_chunksPool.Length == 0)
         {
-            Debug.LogError("no chunk in pool");
-            return null; 
+            Debug.LogError("No chunks in pool");
+            return null;
         }
-        var index = Random.Range(0, _chunckPool.Length);
-        ChunkController chunk = Instantiate(_chunckPool[index], position, Quaternion.identity);
+        
+        var index = Random.Range(0, _chunksPool.Length);
+        ChunkController chunk = Instantiate(_chunksPool[index], position, Quaternion.identity);
+        
         return chunk;
     }
-
-    private ChunkController LastChunk()
+    
+    private ChunkController LastActiveChunk()
     {
         return _instancedChunks[_instancedChunks.Count - 1];
     }
