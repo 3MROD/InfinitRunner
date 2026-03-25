@@ -14,7 +14,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [Header("Slide parameters")] 
     [SerializeField] private float _slideDuration;
     [SerializeField] private Transform[] _slideTarget;
-
+    [SerializeField] private float _slideDownDuration = 1.5f;
 	[Header("component")]
     [SerializeField] private Animator _animator;
 
@@ -22,6 +22,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]private int _currentLaneIndex = 2;
     [SerializeField]private bool _isSliding;
     [SerializeField]private bool _isJumping; 
+    [SerializeField]private bool _isSlidingDown;
     public void Update()
     {
         
@@ -61,6 +62,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
             }
             _currentLaneIndex++;
             StartCoroutine(SlideCoroutine(_slideTarget[_currentLaneIndex])); 
+        }
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+        {
+            if (_isSlidingDown || _isJumping)
+            {
+                return;
+            }
+            
+            StartCoroutine(SlideDownCoroutine());
         }
     }
 
@@ -115,5 +125,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
             yield return null; 
         }
         _isSliding = false;
+    }
+
+    private IEnumerator SlideDownCoroutine()
+    {
+        _isSlidingDown = true;
+        _animator.SetBool("IsSlidingDown", true);
+        
+        var slideTimer = 0f;
+
+        while (slideTimer <= _slideDownDuration)
+        {
+            slideTimer += Time.deltaTime;
+            yield return null;
+        }
+        
+        _isSlidingDown = false;
+        _animator.SetBool("IsSlidingDown", false);
     }
 }

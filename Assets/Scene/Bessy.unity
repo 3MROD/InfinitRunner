@@ -489,10 +489,12 @@ MonoBehaviour:
   - {fileID: 1725910149}
   - {fileID: 70755994}
   - {fileID: 1448471142}
+  _slideDownDuration: 1.5
   _animator: {fileID: 1551892388}
   _currentLaneIndex: 2
   _isSliding: 0
   _isJumping: 0
+  _isSlidingDown: 0
 --- !u!95 &1551892388
 Animator:
   serializedVersion: 7
@@ -528,7 +530,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sphereCenter: {x: 0, y: 0, z: 0}
-  _sphereRadius: 2.04
+  _sphereRadius: 2.91
+  _shrinkSphereCenter: {x: 0, y: 0, z: 0}
+  _shrinkSphereRadius: 1.56
 --- !u!1 &1651287694
 GameObject:
   m_ObjectHideFlags: 0
