@@ -495,6 +495,7 @@ MonoBehaviour:
   _isSliding: 0
   _isJumping: 0
   _isSlidingDown: 0
+  _isDead: 0
 --- !u!95 &1551892388
 Animator:
   serializedVersion: 7
@@ -624,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00915a4b50f710e44bdcc510a3babbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifeCount: 3
+  _lifeCount: 6
 --- !u!4 &1819454796
 Transform:
   m_ObjectHideFlags: 0
@@ -672,6 +673,7 @@ MonoBehaviour:
   _translationSpeed: 20
   _activeChunkCount: 5
   _behindChunkCount: 1
+  _stopDelayOnDammage: 0.2
   _chunksPool:
   - {fileID: 8903121574132136150, guid: 59e5661cbd869d94d85b7a5ad4bc6a16, type: 3}
 --- !u!4 &2042179801

@@ -38,6 +38,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (playerLife > 0)
         {
+            _animator.SetTrigger("TakeDamage");
             return;
         }
         _animator.SetTrigger("Dead");

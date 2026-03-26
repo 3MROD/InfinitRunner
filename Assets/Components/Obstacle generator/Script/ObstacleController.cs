@@ -9,14 +9,20 @@ public class ObstacleController : MonoBehaviour
     [SerializeField, Tooltip("Translation speed of chunks in m/s")] private float _translationSpeed = 1f;
     [SerializeField] private int _activeChunkCount = 5;
     [SerializeField] private int _behindChunkCount = 1;
+    [SerializeField] private float _stopDelayOnDammage = 0.2f;
     
     [Header("Components")]
     [SerializeField] private ChunkController[] _chunksPool;
     
     private readonly List<ChunkController> _instancedChunks = new();
+    private float _baseTranslationSpeed;
+    
+    private float _stopDelayTimer;
+    private bool _stopped;
     
     private void Start()
     {
+        _baseTranslationSpeed = _translationSpeed;
         EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpdate;
         AddBaseChunk();
     }
@@ -30,20 +36,39 @@ public class ObstacleController : MonoBehaviour
     {
         if (playerLifeCount > 0)
         {
-            return;
+            _stopped = true;
+           // return;
         }
 
         _translationSpeed = 0;
     }
 
     private void Update()
-    {
+    { 
+         ResetMovementAfterDelay();
         foreach (var chunk in _instancedChunks)
         {
             chunk.transform.Translate(Vector3.back * _translationSpeed * Time.deltaTime);
         }
 
         UpdateChunks();
+    }
+
+    private void ResetMovementAfterDelay()
+    {
+        if (!_stopped)
+            return;
+
+        
+        _stopDelayTimer += Time.deltaTime;
+            if (_stopDelayTimer > _stopDelayOnDammage)
+            {
+                _stopped = false;
+                _translationSpeed = _baseTranslationSpeed;
+                _stopDelayTimer = 0f;
+
+            }
+        
     }
 
     private void UpdateChunks()
