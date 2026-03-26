@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,7 +17,23 @@ public class ObstacleController : MonoBehaviour
     
     private void Start()
     {
+        EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpdate;
         AddBaseChunk();
+    }
+
+    private void OnDestroy()
+    {
+       EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpdate;
+    }
+
+    private void HandlePlayerLifeUpdate(int playerLifeCount)
+    {
+        if (playerLifeCount > 0)
+        {
+            return;
+        }
+
+        _translationSpeed = 0;
     }
 
     private void Update()

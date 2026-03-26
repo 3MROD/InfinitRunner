@@ -23,8 +23,33 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]private bool _isSliding;
     [SerializeField]private bool _isJumping; 
     [SerializeField]private bool _isSlidingDown;
+    [SerializeField] private bool _isDead; 
+    private void Start()
+    {
+        EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpted;
+    }
+
+    private void OnDestroy()
+    {
+        EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpted; 
+    }
+
+    private void HandlePlayerLifeUpted(int playerLife)
+    {
+        if (playerLife > 0)
+        {
+            return;
+        }
+        _animator.SetTrigger("Dead");
+        _isDead = true;
+    }
+
     public void Update()
     {
+        if (_isDead)
+        {
+            return;
+        }
         
        
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
