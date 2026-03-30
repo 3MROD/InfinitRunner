@@ -5,12 +5,14 @@ public class LifeController : MonoBehaviour
 {
     [SerializeField] private int _lifeCount = 3;
     private int _currentLifeCount;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _currentLifeCount = _lifeCount;
         EventSystem.OnPlayerLifeUpdate?.Invoke(_currentLifeCount);
         EventSystem.OnPlayerCollision += HandlePlayerCollision;
+        
     }
 
     private void HandlePlayerCollision()
@@ -32,6 +34,8 @@ public class LifeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+                
         
     }
 }
