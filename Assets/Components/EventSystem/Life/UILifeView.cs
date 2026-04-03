@@ -14,12 +14,15 @@ public class UILifeView : MonoBehaviour
        
     }
 
- 
+    private void Start()
+    {
+       health = 3;
+    }
 
     private void HandlePlayerLifeUpdated(int newLifeCount)
     {
         _lifeText.text = "Life: " + newLifeCount;
-        health = newLifeCount;
+        health = newLifeCount ;
     }
 
     private void Update()

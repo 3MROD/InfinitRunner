@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class UIMainMenuController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void QuitGame()
     {
+        #if !UNITY_EDITOR
+        Application.Quit();
+        #else
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+
+        
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StarGame()
     {
-        
+        SceneLoaderService.LoadGame();
     }
 }
