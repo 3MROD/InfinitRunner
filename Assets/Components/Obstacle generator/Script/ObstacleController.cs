@@ -19,17 +19,35 @@ public class ObstacleController : MonoBehaviour
     
     private float _stopDelayTimer;
     private bool _stopped;
-    
+
+    private void Awake()
+    {
+        EventSystem.OnStateChanged += HandleStateChanged;
+    }
+
+    private void HandleStateChanged(State newState)
+    {
+        if (newState is not GameState gameState)
+        {
+            EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpdate;
+            return;
+        }
+        _translationSpeed = _baseTranslationSpeed;
+        EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpdate;
+
+    }
+
     private void Start()
     {
         _baseTranslationSpeed = _translationSpeed;
-        EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpdate;
+        _translationSpeed = 0;
         AddBaseChunk();
     }
 
     private void OnDestroy()
     {
        EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpdate;
+       EventSystem.OnStateChanged -= HandleStateChanged;
     }
 
     private void HandlePlayerLifeUpdate(int playerLifeCount)

@@ -23,15 +23,33 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]private bool _isSliding;
     [SerializeField]private bool _isJumping; 
     [SerializeField]private bool _isSlidingDown;
-    [SerializeField] private bool _isDead; 
-    private void Start()
+    [SerializeField] private bool _locked;
+
+    private void Awake()
     {
-        EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpted;
+        EventSystem.OnStateChanged += HandleStateChanged;
+        _locked = true;
     }
+
+    private void HandleStateChanged(State newState)
+    {
+       if (newState is not GameState)
+       {
+           _locked = true;
+           EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpted;
+           return;
+       }
+       _animator.SetTrigger("Running");
+       EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpted;
+       _locked = false;
+    }
+
+   
 
     private void OnDestroy()
     {
         EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpted; 
+        EventSystem.OnStateChanged -= HandleStateChanged;
     }
 
     private void HandlePlayerLifeUpted(int playerLife)
@@ -42,12 +60,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
             return;
         }
         _animator.SetTrigger("Dead");
-        _isDead = true;
+        _locked = true;
     }
 
     public void Update()
     {
-        if (_isDead)
+        if (_locked)
         {
             return;
         }
