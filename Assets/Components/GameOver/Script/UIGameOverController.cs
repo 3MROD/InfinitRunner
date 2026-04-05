@@ -7,26 +7,23 @@ public class UIGameOverController : MonoBehaviour
   private void Awake()
   {
     _gameOverScreen.SetActive(false);
-    EventSystem.OnPlayerLifeUpdate += HandlePlayerLife;
+    EventSystem.OnStateChanged += HandleStateChanged;
+  }
+
+  private void HandleStateChanged(State newState)
+  {
+    _gameOverScreen.SetActive(newState is  GameOverState);
+  }
+
+
+  
+  public void LoadMainMenu()
+  {
+    SceneLoaderService.LoadMainMenu();
   }
 
   private void OnDestroy()
   {
-    EventSystem.OnPlayerLifeUpdate -= HandlePlayerLife;
-  }
-
-  private void HandlePlayerLife(int playerLife)
-  {
-    if (playerLife > 0)
-    {
-      return;
-    }
-    //Show gameOverScreen
-    _gameOverScreen.SetActive(true);
-  }
-
-  public void LoadMainMenu()
-  {
-    SceneLoaderService.LoadMainMenu();
+    EventSystem.OnStateChanged -= HandleStateChanged;
   }
 }

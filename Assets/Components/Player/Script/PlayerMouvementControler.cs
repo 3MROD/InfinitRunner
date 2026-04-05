@@ -36,6 +36,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
        if (newState is not GameState)
        {
            _locked = true;
+           StopAllCoroutines();
            EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpted;
            return;
        }
