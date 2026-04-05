@@ -176,7 +176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 173568631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3da6684a394b9bb7ea317e5c1a48e4, type: 3}
+  m_Script: {fileID: 11500000, guid: e378d470d0e5471e8f1b37623db1240b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &173568633
@@ -539,7 +539,7 @@ MonoBehaviour:
   _isSliding: 0
   _isJumping: 0
   _isSlidingDown: 0
-  _isDead: 0
+  _locked: 0
 --- !u!95 &1551892388
 Animator:
   serializedVersion: 7
