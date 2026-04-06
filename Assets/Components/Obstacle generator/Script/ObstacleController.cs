@@ -14,12 +14,19 @@ public class ObstacleController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private ChunkController[] _chunksPool;
     
+    [Header("Over Time")]
+    [SerializeField, Tooltip("Interval in seconds between each speed increase")] private float _speedUpInterval = 15f;
+    [SerializeField, Tooltip("Speed increase applied on each interval")] private float _speedUpIncrease = 1.5f;
+    
     private readonly List<ChunkController> _instancedChunks = new();
     private float _baseTranslationSpeed;
     
     private float _stopDelayTimer;
     private bool _stopped;
-
+    private bool _inGameState;
+    
+    private GameState _gameState;
+    private int _lastSpeedUpTime; // last time when SpeedUp was applied
     private void Awake()
     {
         EventSystem.OnStateChanged += HandleStateChanged;
@@ -30,10 +37,13 @@ public class ObstacleController : MonoBehaviour
         if (newState is not GameState gameState)
         {
             EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpdate;
+            _inGameState =  false;
             return;
         }
+        _gameState = gameState;
         _translationSpeed = _baseTranslationSpeed;
         EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpdate;
+        _inGameState = true;
 
     }
 
@@ -62,14 +72,32 @@ public class ObstacleController : MonoBehaviour
     }
 
     private void Update()
-    { 
-         ResetMovementAfterDelay();
-        foreach (var chunk in _instancedChunks)
+    {
+        if (!_inGameState)
         {
-            chunk.transform.Translate(Vector3.back * _translationSpeed * Time.deltaTime);
+            return;
         }
+        ResetMovementAfterDelay();
+        TranslateChunks();
 
         UpdateChunks();
+    }
+
+    private void TranslateChunks()
+    {
+        var gameTimer = _gameState.Timer;
+        if (gameTimer != 0 && gameTimer % _speedUpInterval == 0 && gameTimer != _lastSpeedUpTime)
+        {
+            Debug.Log("Speed Up!");
+            _translationSpeed += _speedUpIncrease * Time.deltaTime;
+            _baseTranslationSpeed = _translationSpeed;
+            _lastSpeedUpTime = gameTimer;
+        }
+        ResetMovementAfterDelay();
+        foreach (var chunk in _instancedChunks)
+        {
+            chunk.transform.Translate(Vector3.back * (_translationSpeed * Time.deltaTime));
+        }
     }
 
     private void ResetMovementAfterDelay()

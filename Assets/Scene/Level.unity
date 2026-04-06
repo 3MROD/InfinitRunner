@@ -729,6 +729,8 @@ MonoBehaviour:
   - {fileID: 8903121574132136150, guid: dbb4ee3f42713c04989a525ffdcc6ebd, type: 3}
   - {fileID: 8903121574132136150, guid: 05df6682cbde54f459d1a9bb5f496747, type: 3}
   - {fileID: 8903121574132136150, guid: a0c72515fac1a5a4e928524b2048786e, type: 3}
+  _speedUpInterval: 3
+  _speedUpIncrease: 10
 --- !u!4 &2042179801
 Transform:
   m_ObjectHideFlags: 0
