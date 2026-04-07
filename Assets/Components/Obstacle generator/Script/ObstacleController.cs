@@ -24,12 +24,29 @@ public class ObstacleController : MonoBehaviour
     private float _stopDelayTimer;
     private bool _stopped;
     private bool _inGameState;
+    private bool _inShipAttackState;
     
     private GameState _gameState;
     private int _lastSpeedUpTime; // last time when SpeedUp was applied
+
+    private ShipAttackState _shipAttackState;
     private void Awake()
     {
         EventSystem.OnStateChanged += HandleStateChanged;
+        EventSystem.OnShipStateChange += HandleShipStateChanged; //allez s'abbonner au envent systeme qui dit si le Ship a changer de state
+    }
+
+    private void HandleShipStateChanged(ShipState newShipState)
+    {
+        if (newShipState is not ShipAttackState shipAttackState)
+        {
+            _inShipAttackState = false;
+            return;
+        }
+
+        _shipAttackState = shipAttackState;
+        _inShipAttackState = true;
+        //change Chunk POOL ??
     }
 
     private void HandleStateChanged(State newState)
@@ -152,6 +169,7 @@ public class ObstacleController : MonoBehaviour
         }
     }
 
+
     private void AddBaseChunk()
     {
         for (int i = 0; i < _activeChunkCount; i++)
@@ -170,12 +188,19 @@ public class ObstacleController : MonoBehaviour
 
     private ChunkController AddChunk(Vector3 position)
     {
-        if (_chunksPool.Length == 0)
+        if (_chunksPool.Length == 0) 
         {
             Debug.LogError("No chunks in pool");
             return null;
         }
+
+        if (!_inShipAttackState)
+        {
+            var indexShip = Random.Range(0, 3);
+            ChunkController chunkShip = Instantiate(_chunksPool[indexShip], position, Quaternion.identity);
         
+            return chunkShip;
+        }
         var index = Random.Range(0, _chunksPool.Length);
         ChunkController chunk = Instantiate(_chunksPool[index], position, Quaternion.identity);
         

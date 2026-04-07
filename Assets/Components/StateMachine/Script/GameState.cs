@@ -11,7 +11,6 @@ public class GameState : State
     {
         Debug.Log("Game Started");
         EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpdated;
-        
         _timer = 0f;
     }
     public override void Update()
