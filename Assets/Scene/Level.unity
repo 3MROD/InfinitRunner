@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15962673a1136c6409324f3b0d9f17f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bossLifeCount: 30
+  _bossLifeCount: 5
 --- !u!1 &720045882 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8168627386680690315, guid: 0717ec9453e3e964cac802ca55561731, type: 3}
@@ -324,6 +324,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 14.43, y: 4.9, z: 1}
   m_Center: {x: -2.9, y: 1.35, z: 0}
+--- !u!114 &720045890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720045882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241037c04d72aae4ab8b5711b5ca12a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1266651998
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +477,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1322912638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322912631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660d0d953146bcb4f9c689c70af65bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPoint: {fileID: 1623220242}
+  _cowPrefab: {fileID: 2867522944596798211, guid: 793d276c45d62c44b8d1d3a59057ce6f, type: 3}
 --- !u!1 &1461573827
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +583,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 21.259, y: 0, z: 0}
+--- !u!4 &1623220242 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3309150370498524933, guid: 9480bbb654f1c0642bb8cc2b6172c149, type: 3}
+  m_PrefabInstance: {fileID: 2578500711099916150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1819454794
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +792,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8948426064245742971, guid: 9480bbb654f1c0642bb8cc2b6172c149, type: 3}
       insertIndex: 3
+      addedObject: {fileID: 1322912638}
+    - targetCorrespondingSourceObject: {fileID: 8948426064245742971, guid: 9480bbb654f1c0642bb8cc2b6172c149, type: 3}
+      insertIndex: 4
       addedObject: {fileID: 1322912636}
     - targetCorrespondingSourceObject: {fileID: 8948426064245742971, guid: 9480bbb654f1c0642bb8cc2b6172c149, type: 3}
       insertIndex: -1
@@ -843,6 +877,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8168627386680690315, guid: 0717ec9453e3e964cac802ca55561731, type: 3}
       insertIndex: -1
       addedObject: {fileID: 720045889}
+    - targetCorrespondingSourceObject: {fileID: 8168627386680690315, guid: 0717ec9453e3e964cac802ca55561731, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 720045890}
   m_SourcePrefab: {fileID: 100100000, guid: 0717ec9453e3e964cac802ca55561731, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
