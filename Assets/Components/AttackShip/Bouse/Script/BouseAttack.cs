@@ -10,8 +10,13 @@ public class BouseAttack : MonoBehaviour
     private GameObject  _newBouse;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("toucher");
-        InstanciateBouse();
+        if (other.CompareTag("Bouse"))
+        {
+            
+            Debug.Log("toucher");
+            InstanciateBouse();
+            Destroy(other.gameObject);
+        }
     }
     
     private void InstanciateBouse()
