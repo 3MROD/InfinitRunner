@@ -36,6 +36,7 @@ public class ObstacleController : MonoBehaviour
         EventSystem.OnShipStateChange += HandleShipStateChanged; //allez s'abbonner au envent systeme qui dit si le Ship a changer de state
     }
 
+  
     private void HandleShipStateChanged(ShipState newShipState)
     {
         if (newShipState is not ShipAttackState shipAttackState)

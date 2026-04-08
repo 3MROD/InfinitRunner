@@ -24,11 +24,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]private bool _isJumping; 
     [SerializeField]private bool _isSlidingDown;
     [SerializeField] private bool _locked;
-
+    
     private void Awake()
     {
         EventSystem.OnStateChanged += HandleStateChanged;
+        EventSystem.MegaCharge += HandleMegaCharge;
         _locked = true;
+    }
+
+    private void HandleMegaCharge(bool megaCharge)
+    {
+       
     }
 
     private void HandleStateChanged(State newState)
@@ -66,6 +72,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public void Update()
     {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            EventSystem.MegaCharge?.Invoke(true);
+            StartCoroutine(MegaChargeCoroutine());
+            Debug.Log("megacharge");
+        }
+        
         if (_locked)
         {
             return;
@@ -156,6 +169,19 @@ public class NewMonoBehaviourScript : MonoBehaviour
         _isJumping = false;
         _animator.SetBool("IsJumping", false);
     }
+
+    private IEnumerator MegaChargeCoroutine()
+    {
+        _currentLaneIndex = 2;
+        _locked = true;
+        transform.localScale = new Vector3(2, 2, 2) ;
+        yield return new WaitForSeconds(5F);
+        transform.localScale = new Vector3(1, 1, 1) ;
+        _locked = false;
+        EventSystem.MegaCharge?.Invoke(false);
+        yield return null;
+    }
+
 
     private IEnumerator SlideCoroutine(Transform target)
     {

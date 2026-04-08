@@ -14,15 +14,30 @@ public class ShipAttackState : ShipState
     public override void Enter()
     {
        Debug.Log("ship attack mode");
+       EventSystem.OnShipLifeUpdate += HandleShipLifeUpdate;
+    }
+
+    private void HandleShipLifeUpdate(int shipLife)
+    {
+        if (shipLife > 0)
+        {
+            return;
+        }
+
+        var shipIdleState = new ShipIdleState(ShipStateMachine);
+        ShipStateMachine.ShipChangeState(shipIdleState);
     }
 
     public override void Update()
     {
-       Debug.Log("attacked");
+      
+       
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("End of Attack");
+        EventSystem.OnShipLifeUpdate -= HandleShipLifeUpdate;
+        
     }
 }

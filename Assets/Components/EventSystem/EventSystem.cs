@@ -4,7 +4,11 @@ public static class EventSystem
 {
     public static Action<bool> OnPlayerSlideDown;
     public static Action OnPlayerCollision;
+    public static Action OnShipCollision;
     public static Action<int> OnPlayerLifeUpdate;
+    public static Action<int> OnShipLifeUpdate;
+    public static Action<bool> MegaCharge;
+    
     public static Action<ShipState> OnShipStateChange;
     
     public static Action<State> OnStateChanged;

@@ -9,6 +9,7 @@ public class PlayerCollisionController : MonoBehaviour
  [SerializeField] private Vector3 _shrinkSphereCenter;
  [SerializeField] private float _shrinkSphereRadius;
  private bool _isHit;
+ private bool _inMegaCharge;
 
  private Vector3 _currentSphereCenter;
  private float _currentSphereRadius;
@@ -19,7 +20,23 @@ public class PlayerCollisionController : MonoBehaviour
   _currentSphereCenter = _sphereCenter;
   _currentSphereRadius = _sphereRadius;
   EventSystem.OnPlayerSlideDown += ShrinkColliders;
+  EventSystem.MegaCharge += HandleMegaCharge;
+  _inMegaCharge = false;
+
  }
+
+ private void HandleMegaCharge(bool megaCharge)
+ {
+  if (megaCharge)
+  {
+   _inMegaCharge = true;
+  }
+  else
+  {
+   _inMegaCharge = false;
+  }
+ }
+ 
 
  private void OnDestroy()
  {
@@ -28,6 +45,12 @@ public class PlayerCollisionController : MonoBehaviour
 
  private void Update()
  {
+  if (_inMegaCharge)
+  {
+   Debug.Log("in mega charge");
+   return;
+  }
+  Debug.Log("normal");
   Collider[] hitColliders = Physics.OverlapSphere(_playerSpherePosition, _sphereRadius);
   if (hitColliders.Length > 0 && !_isHit)
   {
