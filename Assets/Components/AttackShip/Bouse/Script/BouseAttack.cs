@@ -8,9 +8,21 @@ public class BouseAttack : MonoBehaviour
     [SerializeField] private GameObject _bouse;
 
     private GameObject  _newBouse;
+    private bool _isSlidingDown;
+
+    private void Start()
+    {
+        EventSystem.OnPlayerSlideDown += HandlePlayerSlideDawn;
+    }
+
+    private void HandlePlayerSlideDawn(bool playerSlideDown)
+    {
+        _isSlidingDown= playerSlideDown;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bouse"))
+        if (other.CompareTag("Bouse") && _isSlidingDown )
         {
             
             Debug.Log("toucher");

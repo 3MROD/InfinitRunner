@@ -24,12 +24,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]private bool _isJumping; 
     [SerializeField]private bool _isSlidingDown;
     [SerializeField] private bool _locked;
-    
+    private bool _charging;
     private void Awake()
     {
         EventSystem.OnStateChanged += HandleStateChanged;
         EventSystem.MegaCharge += HandleMegaCharge;
+        EventSystem.OnPlayerSlideDown += HandleOnPlayerSlideDown;
         _locked = true;
+    }
+
+    private void HandleOnPlayerSlideDown(bool charge)
+    {
+        _charging = charge;
     }
 
     private void HandleMegaCharge(bool megaCharge)
@@ -200,6 +206,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private IEnumerator SlideDownCoroutine()
     {
+        EventSystem.OnPlayerSlideDown?.Invoke(true);
         _isSlidingDown = true;
         _animator.SetBool("IsSlidingDown", true);
         
@@ -213,5 +220,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         
         _isSlidingDown = false;
         _animator.SetBool("IsSlidingDown", false);
+        EventSystem.OnPlayerSlideDown?.Invoke(false);
     }
 }
