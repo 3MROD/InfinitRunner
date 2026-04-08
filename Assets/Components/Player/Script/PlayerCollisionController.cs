@@ -1,4 +1,5 @@
  using System;
+ using System.Collections;
  using UnityEngine;
 
 public class PlayerCollisionController : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerCollisionController : MonoBehaviour
  {
   EventSystem.MegaCharge += HandleMegaCharge;
   EventSystem.OnPlayerSlideDown += HandleOnPlayerSlideDown;
+ 
   _inMegaCharge = false;
   _isSlidingDown = false;
 
@@ -58,6 +60,7 @@ public class PlayerCollisionController : MonoBehaviour
   if (!other.CompareTag("Bouse"))
   {
    EventSystem.OnPlayerCollision?.Invoke();
+   EventSystem.Flash?.Invoke();
    Debug.Log("Player hit something");
    
   }
@@ -75,9 +78,9 @@ public class PlayerCollisionController : MonoBehaviour
   }
   
  }
- 
- 
- }
+
+
+}
 
 
 

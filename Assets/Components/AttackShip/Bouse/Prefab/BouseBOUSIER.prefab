@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetArrival: {fileID: 8603250453599651777, guid: 9480bbb654f1c0642bb8cc2b6172c149, type: 3}
-  _speed: 30
+  _speed: 90
 --- !u!65 &-4857922322097507004
 BoxCollider:
   m_ObjectHideFlags: 0

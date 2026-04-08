@@ -25,12 +25,24 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]private bool _isSlidingDown;
     [SerializeField] private bool _locked;
     private bool _charging;
+    private bool _chargeReady;
     private void Awake()
     {
         EventSystem.OnStateChanged += HandleStateChanged;
         EventSystem.MegaCharge += HandleMegaCharge;
         EventSystem.OnPlayerSlideDown += HandleOnPlayerSlideDown;
+        EventSystem.MegaChargeReady += HandleMegaChargeReady;
         _locked = true;
+    }
+
+    private void Start()
+    {
+        _chargeReady = false;
+    }
+
+    private void HandleMegaChargeReady(bool megaChargeReady)
+    {
+        _chargeReady = megaChargeReady;
     }
 
     private void HandleOnPlayerSlideDown(bool charge)
@@ -80,9 +92,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            EventSystem.MegaCharge?.Invoke(true);
-            StartCoroutine(MegaChargeCoroutine());
-            Debug.Log("megacharge");
+            if (_chargeReady == true)
+            {
+                EventSystem.MegaCharge?.Invoke(true);
+                StartCoroutine(MegaChargeCoroutine());
+                Debug.Log("megacharge");
+            }
+            Debug.Log("megacharge not possible");
         }
         
         if (_locked)

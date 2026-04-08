@@ -23,7 +23,7 @@ public class ShipAttackState : ShipState
         {
             return;
         }
-
+        EventSystem.FreeCow?.Invoke();
         var shipIdleState = new ShipIdleState(ShipStateMachine);
         ShipStateMachine.ShipChangeState(shipIdleState);
     }

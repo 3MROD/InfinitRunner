@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShipIdleState : ShipState
 {
-    private float _initialTime = 30f;
+    private float _initialTime = 15f;
     private float _timer;
     public float Timer => _timer;
 

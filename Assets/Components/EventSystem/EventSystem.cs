@@ -8,8 +8,9 @@ public static class EventSystem
     public static Action<int> OnPlayerLifeUpdate;
     public static Action<int> OnShipLifeUpdate;
     public static Action<bool> MegaCharge;
-    
+    public static Action<bool> MegaChargeReady;
+    public static Action Flash;
     public static Action<ShipState> OnShipStateChange;
-    
+    public static Action FreeCow;
     public static Action<State> OnStateChanged;
 }
