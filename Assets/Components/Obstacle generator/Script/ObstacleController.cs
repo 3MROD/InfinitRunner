@@ -16,6 +16,9 @@ public class ObstacleController : MonoBehaviour
     [Header("Over Time")]
     [SerializeField, Tooltip("Interval in seconds between each speed increase")] private float _speedUpInterval = 15f;
     [SerializeField, Tooltip("Speed increase applied on each interval")] private float _speedUpIncrease = 1.5f;
+    [SerializeField, Tooltip("Ship Attack speed")] private float _speedShipAttack = 5f;
+    [SerializeField, Tooltip("Ship attack SpeedUp interval")]
+    private float _speedWaitShipAttack = 1f;
     
     private readonly List<ChunkController> _instancedChunks = new();
     private float _baseTranslationSpeed;
@@ -27,6 +30,7 @@ public class ObstacleController : MonoBehaviour
     
     private GameState _gameState;
     private int _lastSpeedUpTime; // last time when SpeedUp was applied
+    private int _lastBossSpeed;
 
     private ShipAttackState _shipAttackState;
     private void Awake()
@@ -46,7 +50,7 @@ public class ObstacleController : MonoBehaviour
 
         _shipAttackState = shipAttackState;
         _inShipAttackState = true;
-        //change Chunk POOL ??
+        
     }
 
     private void HandleStateChanged(State newState)
@@ -68,6 +72,7 @@ public class ObstacleController : MonoBehaviour
     {
         _baseTranslationSpeed = _translationSpeed;
         _translationSpeed = 0;
+        _inShipAttackState = false;
         AddBaseChunk();
     }
 
@@ -103,13 +108,34 @@ public class ObstacleController : MonoBehaviour
     private void TranslateChunks()
     {
         var gameTimer = _gameState.Timer;
-        if (gameTimer != 0 && gameTimer % _speedUpInterval == 0 && gameTimer != _lastSpeedUpTime)
+       // if (gameTimer != 0 && gameTimer % _speedUpInterval == 0 && gameTimer != _lastSpeedUpTime)
+       // {
+         //   Debug.Log("Speed Up!");
+           // _translationSpeed += _speedUpIncrease * Time.deltaTime;
+            //_baseTranslationSpeed = _translationSpeed;
+            //_lastSpeedUpTime = gameTimer;
+        //}
+
+        if (_inShipAttackState && gameTimer % _speedWaitShipAttack == 0 && gameTimer != _lastBossSpeed)
         {
-            Debug.Log("Speed Up!");
-            _translationSpeed += _speedUpIncrease * Time.deltaTime;
+         _translationSpeed += _speedShipAttack * Time.deltaTime ;
+         _lastBossSpeed = gameTimer;
+         Debug.Log("BossSpeedup");
+        }
+
+        if (!_inShipAttackState)
+        {
+            _translationSpeed = _baseTranslationSpeed ;
+                 if (gameTimer != 0 && gameTimer % _speedUpInterval == 0 && gameTimer != _lastSpeedUpTime)
+            {
+               Debug.Log("Speed Up!");
+             _translationSpeed += _speedUpIncrease * Time.deltaTime;
             _baseTranslationSpeed = _translationSpeed;
             _lastSpeedUpTime = gameTimer;
+            }
         }
+        
+            
         ResetMovementAfterDelay();
         foreach (var chunk in _instancedChunks)
         {

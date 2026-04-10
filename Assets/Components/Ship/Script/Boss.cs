@@ -5,16 +5,28 @@ public class Boss : MonoBehaviour
 {
     [SerializeField] private int _bossLifeCount = 30;
     private int _currentBossLifeCount;
+    private bool _resetBossLife;
     
     private void Start()
     {
         _currentBossLifeCount = _bossLifeCount;
         EventSystem.OnShipLifeUpdate?.Invoke(_currentBossLifeCount);
         EventSystem.OnShipCollision += HandleShipCollision;
+        EventSystem.OnShipStateChange += ResetLife;
         Debug.Log(_currentBossLifeCount);
     }
 
-  
+    private void ResetLife(ShipState shipState)
+    {
+        if (shipState is ShipIdleState shipIdleState)
+        {
+           _currentBossLifeCount = _bossLifeCount;
+           EventSystem.OnShipLifeUpdate?.Invoke(_currentBossLifeCount);
+        }
+
+    }
+
+
     private void HandleShipCollision()
     {
         if (_currentBossLifeCount - 1 < 0)
