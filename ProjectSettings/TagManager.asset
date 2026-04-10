@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bouse
   - Ship
+  - Collectible
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ public class ObstacleController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private ChunkController[] _chunksPool;
     
+    
     [Header("Over Time")]
     [SerializeField, Tooltip("Interval in seconds between each speed increase")] private float _speedUpInterval = 15f;
     [SerializeField, Tooltip("Speed increase applied on each interval")] private float _speedUpIncrease = 1.5f;
@@ -238,3 +239,4 @@ public class ObstacleController : MonoBehaviour
         return _instancedChunks[_instancedChunks.Count - 1];
     }
 }
+

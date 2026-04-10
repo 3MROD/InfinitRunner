@@ -52,18 +52,24 @@ public class PlayerCollisionController : MonoBehaviour
 
  private void OnTriggerEnter(Collider other)
  {
+  if (other.CompareTag("Collectible"))
+  {
+   Destroy(other.gameObject);
+   return;
+  }
   if (_inMegaCharge)
   {
    Debug.Log("in mega charge");
    return;
   }
-  if (!other.CompareTag("Bouse"))
+  if (!other.CompareTag("Bouse") )
   {
    EventSystem.OnPlayerCollision?.Invoke();
    EventSystem.Flash?.Invoke();
    Debug.Log("Player hit something");
    
   }
+  
 
   if (other.CompareTag("Bouse"))
   {
