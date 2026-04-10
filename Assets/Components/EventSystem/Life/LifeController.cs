@@ -12,6 +12,16 @@ public class LifeController : MonoBehaviour
         _currentLifeCount = _lifeCount;
         EventSystem.OnPlayerLifeUpdate?.Invoke(_currentLifeCount);
         EventSystem.OnPlayerCollision += HandlePlayerCollision;
+        EventSystem.Cloche += HandleCloche;
+    }
+
+    private void HandleCloche()
+    {
+        if (_currentLifeCount < 3)
+        {
+            _currentLifeCount++;
+            EventSystem.OnPlayerLifeUpdate?.Invoke(_currentLifeCount);
+        }
         
     }
 
@@ -29,6 +39,7 @@ public class LifeController : MonoBehaviour
     private void OnDestroy()
     {
         EventSystem.OnPlayerCollision -= HandlePlayerCollision;
+        EventSystem.Cloche -= HandleCloche;
     }
 
     // Update is called once per frame
