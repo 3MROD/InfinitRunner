@@ -196,7 +196,7 @@ public class ObstacleController : MonoBehaviour
 
         if (!_inShipAttackState)
         {
-            var indexShip = Random.Range(0, 3);
+            var indexShip = Random.Range(5,_chunksPool.Length );
             ChunkController chunkShip = Instantiate(_chunksPool[indexShip], position, Quaternion.identity);
         
             return chunkShip;

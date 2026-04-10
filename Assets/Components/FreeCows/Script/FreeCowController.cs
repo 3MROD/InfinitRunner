@@ -12,9 +12,14 @@ public class FreeCowController : MonoBehaviour
 
     private void HandlerFreeCow()
     {
-        _cowPrefab = Instantiate(_cowPrefab, _spawnPoint.position, _spawnPoint.rotation);
+        InstantiateCow();
     }
 
+    private void InstantiateCow()
+    {
+        Instantiate(_cowPrefab, _spawnPoint.position, _spawnPoint.rotation);
+
+    }
     // Update is called once per frame
     void Update()
     {

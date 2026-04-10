@@ -97,6 +97,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 EventSystem.MegaCharge?.Invoke(true);
                 StartCoroutine(MegaChargeCoroutine());
                 Debug.Log("megacharge");
+                _chargeReady = false;
             }
             Debug.Log("megacharge not possible");
         }

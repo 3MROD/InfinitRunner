@@ -26,7 +26,7 @@ public class Boss : MonoBehaviour
         EventSystem.OnShipLifeUpdate?.Invoke(_currentBossLifeCount);
         Debug.Log(_currentBossLifeCount);
     }
-
+    
 
     private void OnDestroy()
     {

@@ -16,6 +16,8 @@ public class ShipIdleState : ShipState
     {
     }
 
+ 
+
     public override void Enter()
     {
         Debug.Log("Entering Ship State");
@@ -30,6 +32,7 @@ public class ShipIdleState : ShipState
             return;
             
         }
+        //EventSystem.OnShipLifeUpdate?.Invoke(5); ??
         
         // Go to Attack state
         var shipAttackState = new ShipAttackState(ShipStateMachine);

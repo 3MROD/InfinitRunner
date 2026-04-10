@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6980674327326509553}
   - component: {fileID: 8903121574132136150}
   m_Layer: 0
-  m_Name: Chunk 1
+  m_Name: ChunkBousier 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4888817363853489348, guid: 99addbd5341c8044ebdea8607d32c970, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.34
+      value: -1.33
       objectReference: {fileID: 0}
     - target: {fileID: 4888817363853489348, guid: 99addbd5341c8044ebdea8607d32c970, type: 3}
       propertyPath: m_LocalPosition.y
