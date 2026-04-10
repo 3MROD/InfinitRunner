@@ -15,6 +15,11 @@ public class BouseAttack : MonoBehaviour
         EventSystem.OnPlayerSlideDown += HandlePlayerSlideDawn;
     }
 
+    private void OnDestroy()
+    {
+        EventSystem.OnPlayerSlideDown -= HandlePlayerSlideDawn;
+    }
+
     private void HandlePlayerSlideDawn(bool playerSlideDown)
     {
         _isSlidingDown= playerSlideDown;

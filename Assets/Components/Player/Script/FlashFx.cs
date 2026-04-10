@@ -19,6 +19,11 @@ public class FlashFx : MonoBehaviour
         
     }
 
+    private void OnDestroy()
+    {
+        EventSystem.Flash -= HandleFlash;
+    }
+
     private void HandleFlash()
     {
         StartCoroutine(WhiteFlash());

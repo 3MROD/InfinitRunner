@@ -22,27 +22,5 @@ public class ShipStateMachine
  }
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  //public ShipState currentShipState;
-
-
-  //public void Initialize(ShipState startingState)
- // {
-   // currentShipState = startingState;
-    //currentShipState.EnterState();
-  //}
-
-  //public void ChangeState(ShipState newState)
-  //{
- //   currentShipState.ExitState();
- //   currentShipState = newState;
-  //  currentShipState.EnterState();
- // }
+ 
 }

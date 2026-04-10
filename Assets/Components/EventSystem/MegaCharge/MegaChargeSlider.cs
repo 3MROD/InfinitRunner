@@ -22,6 +22,11 @@ public class MegaChargeValue : MonoBehaviour
 
    }
 
+   private void OnDestroy()
+   {
+      EventSystem.MegaCharge -= HandleMegaCharge;
+   }
+
    private void HandleMegaCharge(bool megaCharge)
    {
       _isMegaCharge = megaCharge;

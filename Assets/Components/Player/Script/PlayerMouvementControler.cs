@@ -75,6 +75,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpted; 
         EventSystem.OnStateChanged -= HandleStateChanged;
+        EventSystem.MegaCharge -= HandleMegaCharge;
+        EventSystem.OnPlayerSlideDown -= HandleOnPlayerSlideDown;
     }
 
     private void HandlePlayerLifeUpted(int playerLife)

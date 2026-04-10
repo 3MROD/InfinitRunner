@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FreeCowController : MonoBehaviour
@@ -8,6 +9,11 @@ public class FreeCowController : MonoBehaviour
     void Start()
     {
         EventSystem.FreeCow += HandlerFreeCow;
+    }
+
+    private void OnDestroy()
+    {
+        EventSystem.FreeCow -= HandlerFreeCow;
     }
 
     private void HandlerFreeCow()

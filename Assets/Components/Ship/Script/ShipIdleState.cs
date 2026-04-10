@@ -32,7 +32,6 @@ public class ShipIdleState : ShipState
             return;
             
         }
-        //EventSystem.OnShipLifeUpdate?.Invoke(5); ??
         
         // Go to Attack state
         var shipAttackState = new ShipAttackState(ShipStateMachine);

@@ -43,6 +43,7 @@ public class Boss : MonoBehaviour
     private void OnDestroy()
     {
         EventSystem.OnShipCollision -= HandleShipCollision;
+        EventSystem.OnShipStateChange -= ResetLife;
         
     }
 }

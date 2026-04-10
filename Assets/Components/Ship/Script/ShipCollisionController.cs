@@ -10,6 +10,11 @@ public class ShipCollisionController : MonoBehaviour
         _inShipAttackState = false;
     }
 
+    private void OnDestroy()
+    {
+        EventSystem.OnShipStateChange -= HandelShipAttackState;
+    }
+
     private void HandelShipAttackState(ShipState shipState)
     {
         if (shipState is ShipAttackState)

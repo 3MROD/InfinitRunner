@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ShipMouvementController : MonoBehaviour
@@ -6,10 +7,15 @@ public class ShipMouvementController : MonoBehaviour
     [SerializeField] private GameObject _IdlePhaseTarget;
     [SerializeField] private GameObject _ship;
     [SerializeField] private bool _move;
-    void Start()
+    private void Start()
     {
         EventSystem.OnShipStateChange += HandelShipStateChange;
         
+    }
+
+    private void OnDestroy()
+    {
+       EventSystem.OnShipStateChange -= HandelShipStateChange;
     }
 
     private void HandelShipStateChange(ShipState shipState)
