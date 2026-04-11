@@ -52,10 +52,19 @@ public class PlayerCollisionController : MonoBehaviour
 
  private void OnTriggerEnter(Collider other)
  {
-  if (other.CompareTag("Collectible"))
+  if (other.CompareTag("Luciole"))
   {
+   EventSystem.OnLucioleCollision?.Invoke();
    Destroy(other.gameObject);
    return;
+  }
+
+  if (other.CompareTag("Cloche"))
+  {
+   EventSystem.Cloche?.Invoke();
+   Destroy(other.gameObject);
+   return;
+
   }
   if (_inMegaCharge)
   {
