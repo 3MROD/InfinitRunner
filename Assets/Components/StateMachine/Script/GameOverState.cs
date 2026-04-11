@@ -7,8 +7,9 @@
         public override void Enter()
         {
             Debug.Log("Game Over Enter");
+            EventSystem.GameOver?.Invoke();
         }
-
+        
         public override void Update()
         {
         }

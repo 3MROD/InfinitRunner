@@ -15,6 +15,7 @@ public class ShipAttackState : ShipState
     {
        Debug.Log("ship attack mode");
        EventSystem.OnShipLifeUpdate += HandleShipLifeUpdate;
+       EventSystem.GameOver += HandleGameOver;
     }
 
     private void HandleShipLifeUpdate(int shipLife)
@@ -27,6 +28,11 @@ public class ShipAttackState : ShipState
         var shipIdleState = new ShipIdleState(ShipStateMachine);
         ShipStateMachine.ShipChangeState(shipIdleState);
     }
+    private void HandleGameOver()
+    {
+        var shipGameOverState = new ShipGameOverState(ShipStateMachine);
+        ShipStateMachine.ShipChangeState(shipGameOverState);
+    }
 
     public override void Update()
     {
@@ -38,6 +44,7 @@ public class ShipAttackState : ShipState
     {
         Debug.Log("End of Attack");
         EventSystem.OnShipLifeUpdate -= HandleShipLifeUpdate;
+        EventSystem.GameOver -= HandleGameOver;
         
     }
 }

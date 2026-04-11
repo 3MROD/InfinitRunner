@@ -32,5 +32,7 @@ public class GameState : State
         }
         var gameOverState = new GameOverState(StateMachine);
         StateMachine.ChangeState(gameOverState);
+       
     }
-}
+    
+    }

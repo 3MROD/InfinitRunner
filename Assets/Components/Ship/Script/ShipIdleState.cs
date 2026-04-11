@@ -22,6 +22,13 @@ public class ShipIdleState : ShipState
     {
         Debug.Log("Entering Ship State");
         _timer = _initialTime;
+        EventSystem.GameOver += HandleGameOver;
+    }
+
+    private void HandleGameOver()
+    {
+        var shipGameOverState = new ShipGameOverState(ShipStateMachine);
+        ShipStateMachine.ShipChangeState(shipGameOverState);
     }
 
     public override void Update()
@@ -42,5 +49,6 @@ public class ShipIdleState : ShipState
     public override void Exit()
     {
         Debug.Log("Ship Countdown finished");
+        EventSystem.GameOver -= HandleGameOver;
     }
 }

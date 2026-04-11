@@ -5,6 +5,8 @@ using UnityEngine;
 public class UIMainMenuController : MonoBehaviour
 {
     [SerializeField] private TMP_Text _runCountText;
+    [SerializeField] private TMP_Text _lucioleCountText;
+
     private SaveData _saveData;
     
     private void Start()
@@ -13,6 +15,7 @@ public class UIMainMenuController : MonoBehaviour
         _saveData = saveData ?? new SaveData();
         
         _runCountText.text = "Runs: " + _saveData.RunCount;
+        _lucioleCountText.text = "Lucioles: " + _saveData.LucioleCount;
     }
 
     public void StartGame()

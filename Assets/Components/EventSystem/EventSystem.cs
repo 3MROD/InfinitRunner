@@ -13,6 +13,7 @@ public static class EventSystem
     public static Action<bool> MegaChargeReady;
     public static Action Flash;
     public static Action Cloche;
+    public static Action GameOver;
     public static Action<ShipState> OnShipStateChange;
     public static Action FreeCow;
     public static Action<State> OnStateChanged;
