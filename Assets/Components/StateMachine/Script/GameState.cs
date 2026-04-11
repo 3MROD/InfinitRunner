@@ -1,4 +1,5 @@
 using System;
+using Components.SaveService;
 using UnityEngine;
 
 public class GameState : State
@@ -9,6 +10,7 @@ public class GameState : State
     private float _timer;
     public override void Enter()
     {
+       
         Debug.Log("Game Started");
         EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpdated;
         _timer = 0f;
@@ -18,10 +20,20 @@ public class GameState : State
         _timer += Time.deltaTime;
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public override void Exit()
     {
+        
+        var saveData = SaveService.Load();
+        if (saveData.BestTime < Timer)
+        {
+            saveData.BestTime = Timer;
+            SaveService.Save(saveData);
+        }
+
         Debug.Log("Game Exit");
         EventSystem.OnPlayerLifeUpdate -= HandlePlayerLifeUpdated;
+        
 
     }
     private void HandlePlayerLifeUpdated(int playerLife)
