@@ -4,5 +4,6 @@ namespace Components.SaveService
     public class SaveData
     {
         public int RunCount;
+        public int LucioleCount;
     }
 }
