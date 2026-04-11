@@ -12,6 +12,7 @@ public class MegaChargeValue : MonoBehaviour
    [SerializeField] private float currentCharge;
    [SerializeField] private float chargeAmount;
    [SerializeField] private bool _isMegaCharge;
+     
    private void Start()
    {
       currentCharge = 0;
@@ -48,7 +49,7 @@ public class MegaChargeValue : MonoBehaviour
       MegaChargeSlider.value = currentCharge;
       MegaChargeSlider.maxValue = maxCharge;
       MegaChargeSlider.minValue = minCharge;
-      MegaChargeText.text = currentCharge.ToString() + "/" + maxCharge.ToString();
+      MegaChargeText.text = currentCharge.ToString("n0") + "/" + maxCharge.ToString();
       
    }
 }

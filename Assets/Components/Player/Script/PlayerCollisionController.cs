@@ -71,14 +71,21 @@ public class PlayerCollisionController : MonoBehaviour
    Debug.Log("in mega charge");
    return;
   }
-  if (!other.CompareTag("Bouse") )
+ 
+
+  if (other.CompareTag("Encornable"))
   {
-   EventSystem.OnPlayerCollision?.Invoke();
-   EventSystem.Flash?.Invoke();
-   Debug.Log("Player hit something");
-   
+   if (_isSlidingDown == false)
+   {
+    EventSystem.OnPlayerCollision?.Invoke();
+
+    Debug.Log("Player hit Encornable");
+    return;
+   }
+   Destroy(other.gameObject);
+   Debug.Log("Skipped Encornable");
+   return;
   }
-  
 
   if (other.CompareTag("Bouse"))
   {
@@ -87,11 +94,15 @@ public class PlayerCollisionController : MonoBehaviour
     EventSystem.OnPlayerCollision?.Invoke();
     
     Debug.Log("Player hit bousier");
+    return;
    }
 
    Debug.Log("skiped bousier");
+   return;
   }
-  
+  EventSystem.OnPlayerCollision?.Invoke();
+  EventSystem.Flash?.Invoke();
+  Debug.Log("Player hit something");
  }
 
 
