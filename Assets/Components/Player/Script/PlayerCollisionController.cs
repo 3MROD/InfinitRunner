@@ -7,7 +7,7 @@ public class PlayerCollisionController : MonoBehaviour
  // controll the reaction to collision and life update depending is it's In MegaCharge / SlidingDown  and the Tags
  [SerializeField]private bool _inMegaCharge;
  [SerializeField]private bool _isSlidingDown;
- 
+ [SerializeField] private ParticleSystem _particleSystem;
 
 
  private void Start()
@@ -88,6 +88,7 @@ public class PlayerCollisionController : MonoBehaviour
     return;
    }
    Destroy(other.gameObject);
+   _particleSystem.Play();
    Debug.Log("Skipped Encornable");
    return;
   }
@@ -102,7 +103,7 @@ public class PlayerCollisionController : MonoBehaviour
     Debug.Log("Player hit bousier");
     return;
    }
-
+   _particleSystem.Play();
    Debug.Log("skiped bousier");
    return;
   }
