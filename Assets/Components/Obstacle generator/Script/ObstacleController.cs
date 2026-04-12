@@ -241,7 +241,7 @@ public class ObstacleController : MonoBehaviour
         //if in ShipAttackState change the range of chunks that can be pooled 
         if (!_inShipAttackState)
         {
-            var indexShip = Random.Range(5,_chunksPool.Length );
+            var indexShip = Random.Range(20,_chunksPool.Length );
             ChunkController chunkShip = Instantiate(_chunksPool[indexShip], position, Quaternion.identity);
         
             return chunkShip;
