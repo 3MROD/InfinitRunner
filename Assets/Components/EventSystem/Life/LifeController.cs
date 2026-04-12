@@ -4,9 +4,10 @@ using UnityEngine;
 public class LifeController : MonoBehaviour
 {
     //Amount of Life and Life Updated
+    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private int _lifeCount = 3;
     private int _currentLifeCount;
-    
+   
     void Start()
     {
         //Set Life count
@@ -20,11 +21,13 @@ public class LifeController : MonoBehaviour
 
     private void HandleCloche()
     {
-        // If Cloche called and the currents life is not at 3 add one life, and update OnplayerLifeUpdate 
+        // If Cloche called and the currents life is not at 3 add one life, and update OnplayerLifeUpdate, and Play SFX
         if (_currentLifeCount < 3)
         {
+            _audioSource.Play();
             _currentLifeCount++;
             EventSystem.OnPlayerLifeUpdate?.Invoke(_currentLifeCount);
+            
         }
         
     }

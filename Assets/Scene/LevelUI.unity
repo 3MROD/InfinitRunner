@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -41.162292, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3214,8 +3214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39407918fa193cc4ca48b970cb3e31e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MegaChargeSlider: {fileID: 1010968339}
   MegaChargeText: {fileID: 693994449}
+  MegaChargeSlider: {fileID: 1010968339}
   maxCharge: 100
   minCharge: 0
   currentCharge: 44

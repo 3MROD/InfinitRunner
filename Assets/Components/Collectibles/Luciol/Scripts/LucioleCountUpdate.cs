@@ -5,6 +5,7 @@ using UnityEngine;
 public class LucioleCountUpdate : MonoBehaviour
 {
     [SerializeField] private int _LucioleCount = 1;
+    [SerializeField] private AudioSource _audioSource;
     private int _currentLucioleCount;
     private SaveData _saveData;
     // 
@@ -34,8 +35,9 @@ public class LucioleCountUpdate : MonoBehaviour
 
     private void HandleLucioleCollision()
     {
-        // when OnLucioleCollision is called increase the Luciole count by one and update the LucioleUpdate int 
+        // when OnLucioleCollision is called increase the Luciole count by one and update the LucioleUpdate int, play sfx 
         _currentLucioleCount++;
+        _audioSource.Play();
         EventSystem.LucioleUpdate?.Invoke(_currentLucioleCount);
         Debug.Log(_currentLucioleCount);
     }

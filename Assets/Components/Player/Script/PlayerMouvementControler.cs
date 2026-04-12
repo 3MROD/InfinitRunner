@@ -24,6 +24,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]private bool _isJumping; 
     [SerializeField]private bool _isSlidingDown;
     [SerializeField] private bool _locked;
+    [SerializeField] private AudioSource _audioClip;
     private bool _charging;
     private bool _chargeReady;
     private void Awake()
@@ -242,10 +243,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private IEnumerator SlideDownCoroutine()
     {
         // Set animation to Is slidding down Invoke OnPlayerSlideDown bool true
+        _audioClip.Play();
         EventSystem.OnPlayerSlideDown?.Invoke(true);
         _isSlidingDown = true;
         _animator.SetBool("IsSlidingDown", true);
-        
         // slide down during _slidedownDuration Time
         var slideTimer = 0f;
 
