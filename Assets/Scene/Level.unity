@@ -288,8 +288,8 @@ MonoBehaviour:
   - {fileID: 8903121574132136150, guid: ae6d20bafeb15bb4d9fd3c75950a0ae3, type: 3}
   _speedUpInterval: 5
   _speedUpIncrease: 10
-  _speedShipAttack: 1
-  _speedWaitShipAttack: 400
+  _speedShipAttack: 30
+  _speedWaitShipAttack: 10
 --- !u!1 &334038568
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 1322912642}
   _cowPrefab: {fileID: 2867522944596798211, guid: 793d276c45d62c44b8d1d3a59057ce6f, type: 3}
+  freeCowCount: 0
 --- !u!4 &1322912642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8603250453599651777, guid: 9480bbb654f1c0642bb8cc2b6172c149, type: 3}
@@ -955,8 +956,8 @@ MonoBehaviour:
   - {fileID: 8903121574132136150, guid: a0c72515fac1a5a4e928524b2048786e, type: 3}
   _speedUpInterval: 5
   _speedUpIncrease: 10
-  _speedShipAttack: 1
-  _speedWaitShipAttack: 400
+  _speedShipAttack: 30
+  _speedWaitShipAttack: 10
 --- !u!4 &2042179801
 Transform:
   m_ObjectHideFlags: 0

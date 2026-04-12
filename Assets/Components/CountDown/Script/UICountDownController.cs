@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UICountDownController : MonoBehaviour
 {
+    // in canvas make countdown window and as child text
     [SerializeField] private GameObject _window;
     [SerializeField] private TMP_Text _countdownText;
     
@@ -12,6 +13,7 @@ public class UICountDownController : MonoBehaviour
     
     private void Awake()
     {
+        // desactivate Window and listen to StateChange
         _window.SetActive(false);
         EventSystem.OnStateChanged += HandleStateChanged;
     }
@@ -23,6 +25,7 @@ public class UICountDownController : MonoBehaviour
 
     private void HandleStateChanged(State state)
     {
+        //When State change is called if in Countdown state Activate Window and make var _iscountdown true 
         if (state is not CountdownState countdownState)
         {
             _inCountdown = false;
@@ -37,6 +40,7 @@ public class UICountDownController : MonoBehaviour
 
     private void Update()
     {
+        // if _isCountdown true Show the CountDowState Timer
         if (!_inCountdown)
         {
             return;

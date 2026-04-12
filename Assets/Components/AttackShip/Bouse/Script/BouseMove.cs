@@ -6,12 +6,8 @@ public class BouseMove : MonoBehaviour
     
     [SerializeField] private Transform _targetArrival;
     [SerializeField] private float _speed = 50f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
 
-    // Update is called once per frame
+    //When  Bouse Projectil Prefab is instantiated it will traval towards the Ship, (ship has a Box Collider to destroy it on trigger) 
     void Update()
     {
         

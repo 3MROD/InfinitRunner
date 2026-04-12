@@ -13,6 +13,7 @@ public class ShipAttackState : ShipState
 
     public override void Enter()
     {
+        //Listen to OnShipLifeUpdate and GameOver
        Debug.Log("ship attack mode");
        EventSystem.OnShipLifeUpdate += HandleShipLifeUpdate;
        EventSystem.GameOver += HandleGameOver;
@@ -20,6 +21,7 @@ public class ShipAttackState : ShipState
 
     private void HandleShipLifeUpdate(int shipLife)
     {
+        //if ship life under 0 Change State to ShipIdleState and Invoke FreeCow
         if (shipLife > 0)
         {
             return;
@@ -30,6 +32,7 @@ public class ShipAttackState : ShipState
     }
     private void HandleGameOver()
     {
+        //if GameOver set ShipState to ShipGameOverState to stop the ShipAttack cycle
         var shipGameOverState = new ShipGameOverState(ShipStateMachine);
         ShipStateMachine.ShipChangeState(shipGameOverState);
     }

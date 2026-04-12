@@ -6,6 +6,7 @@ public class ShipCollisionController : MonoBehaviour
     private bool _inShipAttackState;
     private void Start()
     {
+        //Listen to OnShipStateChange
         EventSystem.OnShipStateChange += HandelShipAttackState;
         _inShipAttackState = false;
     }
@@ -17,6 +18,7 @@ public class ShipCollisionController : MonoBehaviour
 
     private void HandelShipAttackState(ShipState shipState)
     {
+        // link ShipAttackState to Script bool _inShipAttackState
         if (shipState is ShipAttackState)
         {
             _inShipAttackState = true;
@@ -31,6 +33,7 @@ public class ShipCollisionController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //  destroy the other gameobject, in ShipAttackState Invoke OnShipCollision to remouve life 
         if (_inShipAttackState)
         {
             EventSystem.OnShipCollision?.Invoke();

@@ -6,19 +6,22 @@ public class UILucioleController : MonoBehaviour
 {
     [SerializeField] private TMP_Text LucioleText;
     private int LucioleNumber;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // this script goes on the UILucioleCount to show Count
     private void Awake()
     {
+        //listen to LucioleUpdate
         EventSystem.LucioleUpdate += HandleLucioleUpdate;
     }
 
     private void Start()
     {
+        
         LucioleNumber = 0;
     }
 
     private void HandleLucioleUpdate(int newLucioleNumber)
     {
+        //When LucioleUpdate is called Update UI Text
        LucioleText.text = "Luciole: " + newLucioleNumber;
        LucioleNumber = newLucioleNumber;
     }

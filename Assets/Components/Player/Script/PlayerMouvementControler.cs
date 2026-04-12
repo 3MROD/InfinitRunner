@@ -28,10 +28,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private bool _chargeReady;
     private void Awake()
     {
+        // listen to OnStateChanged MegaCharge OnPlayerSlideDown and MegaCharge ready 
         EventSystem.OnStateChanged += HandleStateChanged;
         EventSystem.MegaCharge += HandleMegaCharge;
         EventSystem.OnPlayerSlideDown += HandleOnPlayerSlideDown;
         EventSystem.MegaChargeReady += HandleMegaChargeReady;
+        //block the mouvement
         _locked = true;
     }
 
@@ -42,11 +44,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private void HandleMegaChargeReady(bool megaChargeReady)
     {
+       // linking MegaCharge Bool to _ChargeReady
         _chargeReady = megaChargeReady;
     }
 
     private void HandleOnPlayerSlideDown(bool charge)
     {
+        // linking OnPlayerSlideDown Bool to _charge
         _charging = charge;
     }
 
@@ -57,6 +61,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private void HandleStateChanged(State newState)
     {
+        // if in GameState set animator to Running unlock the mouvement and listen to OnplayerLifeUpdate
        if (newState is not GameState)
        {
            _locked = true;
@@ -81,6 +86,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private void HandlePlayerLifeUpted(int playerLife)
     {
+        // when PlayerLifeupdate is called if player has no more life set Dead animation and lock mouvement, otherwise Damage animation
         if (playerLife > 0)
         {
             _animator.SetTrigger("TakeDamage");
@@ -92,6 +98,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public void Update()
     {
+        //if the Space bar while activate Megacharge and Coroutine if _charge ready is true 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             if (_chargeReady == true)
@@ -103,13 +110,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
             }
             Debug.Log("megacharge not possible");
         }
-        
+        // can't use the Keyboard 
         if (_locked)
         {
             return;
         }
         
-       
+       // Up Arrow will start the jump coroutine
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             if (_isJumping)
@@ -118,7 +125,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             }
             StartCoroutine(JumpCoroutine());
         }
-
+        // left arrow will mouve -1 on the lane index until no more left
         if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
             if (_isSliding)
@@ -133,6 +140,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
             StartCoroutine(SlideCoroutine(_slideTarget[_currentLaneIndex])); 
         }
 
+        // left arrow will mouve +1 on the lane index until Max
+
         if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
             if (_isSliding)
@@ -146,6 +155,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             _currentLaneIndex++;
             StartCoroutine(SlideCoroutine(_slideTarget[_currentLaneIndex])); 
         }
+        // down Arrow while start the SlideDown Coroutine 
         if (Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
             if (_isSlidingDown || _isJumping)
@@ -159,6 +169,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private IEnumerator JumpCoroutine()
     {
+        // Change animation to jumping
         _isJumping = true;
         _animator.SetBool("IsJumping", true);
         float jumpTimer =0f;
@@ -193,10 +204,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
         _isJumping = false;
         _animator.SetBool("IsJumping", false);
+        // Change animation to not jumping
     }
 
     private IEnumerator MegaChargeCoroutine()
     {
+        //MegaCharge
+        // Lock Mouvement, player Scale Gameobject, wait ,then descale , reactivate mouvement, MegaCharge to False
         _currentLaneIndex = 2;
         _locked = true;
         transform.localScale = new Vector3(2, 2, 2) ;
@@ -210,10 +224,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private IEnumerator SlideCoroutine(Transform target)
     {
+        // Mouvement 
         _isSliding = true;
         var slideTimer = 0F;
         while (slideTimer < _slideDuration)
         {
+            //smooth change of target during _SlideDuration Time  
             slideTimer += Time.deltaTime;
             var normalizedTime = slideTimer / _slideDuration;
             var targetPosition = new Vector3(target.position.x,transform.position.y, target.position.z);
@@ -225,10 +241,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private IEnumerator SlideDownCoroutine()
     {
+        // Set animation to Is slidding down Invoke OnPlayerSlideDown bool true
         EventSystem.OnPlayerSlideDown?.Invoke(true);
         _isSlidingDown = true;
         _animator.SetBool("IsSlidingDown", true);
         
+        // slide down during _slidedownDuration Time
         var slideTimer = 0f;
 
         while (slideTimer <= _slideDownDuration)
@@ -236,7 +254,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             slideTimer += Time.deltaTime;
             yield return null;
         }
-        
+        // Stop SliddingDown animation and Invoke OnPlayerSlideDown bool false
         _isSlidingDown = false;
         _animator.SetBool("IsSlidingDown", false);
         EventSystem.OnPlayerSlideDown?.Invoke(false);

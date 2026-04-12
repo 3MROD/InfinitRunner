@@ -20,6 +20,7 @@ public class ShipIdleState : ShipState
 
     public override void Enter()
     {
+        //Set the Timer full and Listen to GameOver
         Debug.Log("Entering Ship State");
         _timer = _initialTime;
         EventSystem.GameOver += HandleGameOver;
@@ -27,12 +28,14 @@ public class ShipIdleState : ShipState
 
     private void HandleGameOver()
     {
+        //Change state to ShipGameOverState when GameOver is Called
         var shipGameOverState = new ShipGameOverState(ShipStateMachine);
         ShipStateMachine.ShipChangeState(shipGameOverState);
     }
 
     public override void Update()
     {
+        //Timer count 
         _timer -= Time.deltaTime;
         if (_timer > 0)
         {

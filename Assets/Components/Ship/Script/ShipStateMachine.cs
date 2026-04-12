@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShipStateMachine
 {
+ //ShipStateMachine to deal with the Changing of states and update 
   public ShipState CurrentShipState;
  public void ShipChangeState(ShipState newState)
  {

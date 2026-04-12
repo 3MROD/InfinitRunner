@@ -2,6 +2,7 @@
 
     public class CountdownState : State
     {
+        //3scd countdown state befor Gamestate
         private float _initialTime = 3f;
         private float _timer;
     
@@ -17,6 +18,7 @@
 
         public override void Update()
         {
+            //countdown
             _timer -= Time.deltaTime;
             if (_timer > 0)
             {

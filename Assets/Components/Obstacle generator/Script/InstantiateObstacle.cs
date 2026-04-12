@@ -2,15 +2,5 @@ using UnityEngine;
 
 public class InstantiateObstacle : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   // wanted that when the chunk is created this script can choose a radome lane to instatiate Obstacle or prefab
 }

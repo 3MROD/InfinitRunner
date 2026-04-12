@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class ShipState
 {
+    // what Will be injected in all different ShipStates that heritate from this class
     protected Boss boss;
     protected ShipStateMachine stateMachine;
     public ShipStateMachine ShipStateMachine { get; set; }

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BouseAttack : MonoBehaviour
 {
-    [SerializeField] private Transform _spawnDeparture;
+    [SerializeField ] private Transform _spawnDeparture;
     [SerializeField] private GameObject _bouse;
 
     private GameObject  _newBouse;
     private bool _isSlidingDown;
-
+    
+// This Script is on The Player Gameobject to detect Bousier GameObject and enable Attack by instanciating bouse projectil
     private void Start()
     {
         EventSystem.OnPlayerSlideDown += HandlePlayerSlideDawn;
@@ -22,11 +23,13 @@ public class BouseAttack : MonoBehaviour
 
     private void HandlePlayerSlideDawn(bool playerSlideDown)
     {
+        // slidding down bool
         _isSlidingDown= playerSlideDown;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // We can Only instantiate a Bouse if we are slidding down 
         if (other.CompareTag("Bouse") && _isSlidingDown )
         {
             
@@ -38,6 +41,8 @@ public class BouseAttack : MonoBehaviour
     
     private void InstanciateBouse()
     {
+        // the new bool will be Instantiate the bouse projectil prefab 
+        // the Spawn point is a Empty child of the Player GameObject 
         _newBouse = Instantiate(_bouse, _spawnDeparture.position, _spawnDeparture.rotation);
     }
 

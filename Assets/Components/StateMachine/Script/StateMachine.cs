@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class StateMachine
 {
+    //StateMachine to deal with the Changing of states and update the CurrentState
     public State CurrentState;
     
     public void ChangeState(State newState)

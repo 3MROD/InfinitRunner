@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ShipGameOverState : ShipState
 {
+    //just to stop ShipAttack cycle
     public ShipGameOverState(Boss boss, ShipStateMachine stateMachine) : base(boss, stateMachine)
     {
     }

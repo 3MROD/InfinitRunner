@@ -10,20 +10,20 @@ public class GameState : State
     private float _timer;
     public override void Enter()
     {
-       
+       // set timer 0 and listen ton OnPlayerLife Update
         Debug.Log("Game Started");
         EventSystem.OnPlayerLifeUpdate += HandlePlayerLifeUpdated;
         _timer = 0f;
     }
     public override void Update()
     {
+        //time increase in time
         _timer += Time.deltaTime;
     }
 
-    // ReSharper disable Unity.PerformanceAnalysis
     public override void Exit()
     {
-        
+        //When GameState Over Load and compare best time and save if higher 
         var saveData = SaveService.Load();
         if (saveData.BestTime < Timer)
         {
@@ -38,6 +38,7 @@ public class GameState : State
     }
     private void HandlePlayerLifeUpdated(int playerLife)
     {
+        //if player life is 0 new state to GameOverState
         if (playerLife > 0)
         {
             return;

@@ -9,9 +9,9 @@ public class UITimerController : MonoBehaviour
 
     private bool _inGameState;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        //Listen to OnStateChanged, hide text
         EventSystem.OnStateChanged += HandleStateChanged;
         _timeText.gameObject.SetActive(false);
     }
@@ -23,6 +23,7 @@ public class UITimerController : MonoBehaviour
 
     private void HandleStateChanged(State newState)
     {
+        // in GameState show the Time Text and set _inGameState var to true
         if (newState is not GameState gameState)
         {
             _inGameState = false;
@@ -39,6 +40,7 @@ public class UITimerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // when in gameState the text will be in 00:00 and from the GameStateTimer
         if (!_inGameState)
         {
             return;

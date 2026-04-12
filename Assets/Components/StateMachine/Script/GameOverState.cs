@@ -1,6 +1,7 @@
  using UnityEngine;
 
  public class GameOverState : State
+ //end of game state call GameOver Event
     {
         public GameOverState(StateMachine stateMachine) : base(stateMachine) { }
 

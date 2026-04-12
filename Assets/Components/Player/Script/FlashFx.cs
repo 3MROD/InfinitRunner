@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FlashFx : MonoBehaviour
 {
+    // Flash effect for when hit to change the player material for few seconds with a coroutine
     [SerializeField] private SkinnedMeshRenderer playerRenderer;
     [SerializeField] private Color flashColour = Color.white;
     [SerializeField] private float flashDuration = 0.1f;

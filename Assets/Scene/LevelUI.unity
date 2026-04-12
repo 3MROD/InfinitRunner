@@ -1642,8 +1642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c840f1bcb62f9479ef3cd64f3d89f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bossLifeText: {fileID: 1632454951}
   _bossWindow: {fileID: 1376183822}
+  _bossLifeText: {fileID: 1632454951}
   _bossLifeSlider: {fileID: 257212335}
   maxBossLife: 5
   minBossLife: 0
@@ -2789,7 +2789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Boss Life
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
