@@ -16,5 +16,6 @@ public static class EventSystem
     public static Action GameOver;
     public static Action<ShipState> OnShipStateChange;
     public static Action FreeCow;
+    public static Action<int> FreeCowCount;
     public static Action<State> OnStateChanged;
 }

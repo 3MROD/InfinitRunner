@@ -265,7 +265,7 @@ MonoBehaviour:
   _translationSpeed: 70
   _activeChunkCount: 10
   _behindChunkCount: 1
-  _stopDelayOnDammage: 1
+  _stopDelayOnDammage: 0.4
   _chunksPool:
   - {fileID: 8903121574132136150, guid: ae6d20bafeb15bb4d9fd3c75950a0ae3, type: 3}
   - {fileID: 8903121574132136150, guid: d6170a8294cd15540bdd1625987356c8, type: 3}
@@ -613,7 +613,7 @@ Transform:
   m_GameObject: {fileID: 1266651998}
   serializedVersion: 2
   m_LocalRotation: {x: 0.004794357, y: -0.9062495, z: 0.42259106, w: 0.010281533}
-  m_LocalPosition: {x: 0, y: 34, z: 36.5}
+  m_LocalPosition: {x: 0, y: 321, z: 1127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -941,7 +941,7 @@ MonoBehaviour:
   _translationSpeed: 70
   _activeChunkCount: 10
   _behindChunkCount: 1
-  _stopDelayOnDammage: 1
+  _stopDelayOnDammage: 0.4
   _chunksPool:
   - {fileID: 8903121574132136150, guid: 61f1177fd5aceb349b85944901064f82, type: 3}
   - {fileID: 8903121574132136150, guid: af036643e7616fd49907b0dea6195763, type: 3}

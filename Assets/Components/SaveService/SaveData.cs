@@ -6,5 +6,6 @@ namespace Components.SaveService
         public int RunCount;
         public int LucioleCount;
         public int BestTime;
+        // public int BestFreeCowCount;
     }
 }
